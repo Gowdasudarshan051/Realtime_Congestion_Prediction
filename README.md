@@ -15,12 +15,12 @@ graph TD
     A2[Bangalore Traffic Simulator] -->|Raw Simulated JSON| B
     
     %% Message Broker
-    subgraph Message Broker [Apache Kafka Infrastructure]
+    subgraph Message_Broker [Apache Kafka Infrastructure]
         B[Kafka Topic: traffic.raw]
     end
 
     %% Streaming Processing
-    subgraph Streaming ETL [Apache Spark / PySpark Engine]
+    subgraph Streaming_ETL [Apache Spark / PySpark Engine]
         C[Spark Streaming Job: Silver Layer] -->|Reads from Kafka| B
         C -->|Validates & Cleans Data| D[(Parquet Silver Table)]
         E[Spark Aggregation Job: Gold Layer] -->|Reads Silver Parquet| D
@@ -28,24 +28,24 @@ graph TD
     end
 
     %% Backend and ML
-    subgraph API & Inference Service [FastAPI Web Application]
+    subgraph API_Inference [FastAPI Web Application]
         G[FastAPI Backend] -->|Polls Latest Data| F
         H[TensorFlow Keras / Joblib Models] -->|Real-Time Inference| G
         G -->|Loads Scalers / Model Weights| I[LSTM / GRU / RF Models]
     end
 
     %% Clients
-    subgraph Visual Analytics [Frontend Client Interface]
+    subgraph Visual_Analytics [Frontend Client Interface]
         J[Web Dashboard index.html] -->|REST API Requests| G
         G -->|WebSockets Live Broadcast| J
         J -->|Visualizes Charts / Predictions| K[Chart.js / Dynamic UI]
     end
     
     %% Styles
-    style Message Broker fill:#1e1e24,stroke:#3c4043,color:#e8eaed
-    style Streaming ETL fill:#2d3037,stroke:#5f6368,color:#e8eaed
-    style API & Inference Service fill:#243447,stroke:#8ab4f8,color:#e8eaed
-    style Visual Analytics fill:#202e3b,stroke:#81c995,color:#e8eaed
+    style Message_Broker fill:#1e1e24,stroke:#3c4043,color:#e8eaed
+    style Streaming_ETL fill:#2d3037,stroke:#5f6368,color:#e8eaed
+    style API_Inference fill:#243447,stroke:#8ab4f8,color:#e8eaed
+    style Visual_Analytics fill:#202e3b,stroke:#81c995,color:#e8eaed
 ```
 
 ---
